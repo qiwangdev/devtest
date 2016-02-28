@@ -62,7 +62,13 @@ dependencies {
             'org.springframework.boot:spring-boot-starter-hateoas',
             'org.springframework.boot:spring-boot-starter-data-jpa'
     providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
-
+	
+	// JSON Parser
+    compile "org.json:json:20090211"
+	
+	// HTTP Client
+	compile "org.apache.httpcomponents:httpclient:4.5.1"
+	
     // JPA Provider
     compile "org.hibernate:hibernate-entitymanager:$hibernateEntityManagerVersion",
             "org.hibernate:hibernate-validator:$hibernateValidatorVersion"

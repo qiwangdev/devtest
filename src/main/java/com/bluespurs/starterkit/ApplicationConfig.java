@@ -40,6 +40,10 @@ public class ApplicationConfig extends SpringBootServletInitializer {
     private String databaseUsername;
     @Value("${db.password}")
     private String databasePassword;
+	@Value("${api.keys.bestbuy}")
+	private String bestBuyKey;
+	@Value("${api.keys.walmart}")
+	private String walmartKey;
 
     public static void main(String[] args) {
         SpringApplication.run(ApplicationConfig.class, args);
@@ -49,7 +53,17 @@ public class ApplicationConfig extends SpringBootServletInitializer {
     protected SpringApplicationBuilder configure(SpringApplicationBuilder applicationBuilder) {
         return applicationBuilder.sources(ApplicationConfig.class);
     }
-
+	
+	@Bean
+    public String bestBuyKey() {
+        return bestBuyKey;
+    }
+	
+	@Bean
+    public String walmartKey() {
+        return walmartKey;
+    }
+	
     @Bean
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
