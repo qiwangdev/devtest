@@ -6,19 +6,20 @@
 - Currency conversion from USD to CAD is certainly limited in my implementation. Ideally the rate should be updated on a regular basis (e.g., daily).
 - Since the two external APIs don’t seem to surround number values with quotes, my implementation for the product search is doing the same.
 - Exception handling could be improved (with customized exceptions and clearer categorization). This will also help generate more detailed messages for special cases (e.g., how the user input is invalid and how it can be corrected).
+- Implement stricter user input validation.
 - Responses should be customized for various status codes (e.g., 400, 404, 500 etc.).
 - Server information should be hidden in response headers for security reasons.
 
 ## For task 2:
 
 Data models:
-Product with an auto-increment ID as the primary key, and a name.
+Product with an auto-increment ID as the primary key, a name, and a bestPrice.
 User with an auto-increment ID as the primary key, and an email.
 (many-to-many) Product-user association with an auto-increment ID as the primary key, a pid as a foreign key referencing product id, and a uid as a foreign key referencing user id.
 
 A background service should be set up to run constantly at an appropriate interval to query the external APIs for all existing products in our database. When a lower price of the same product is found, we update the best price of that product and send an email to every user associated with (who subscribed to) that product.
 
-After the user inputs a valid productName and an email, we check the database to see if the product already exists. If not, we query the external APIs and persist the new product with its (lowest) price. We also check if the email exists. If not, we persist the new user. Then we persist the product-user association if it didn't exist before.
+After the user inputs a valid productName and an email, we check the database to see if the product already exists. If not, we query the external APIs and persist the new product with its (lowest) price. We also check if the email exists. If not, we persist the new user. Then we persist the product-user association if it didn't exist before. Please note that this is a conceptual description. If we use an ORM frameowork like Hibernate with proper cascading settings, it is possible to achieve the above effects with fewer explicit data access operations.
 
 # BlueSpurs Interview Test
 
